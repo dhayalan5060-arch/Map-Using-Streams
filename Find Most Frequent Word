@@ -1,0 +1,22 @@
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.function.Function;
+ 
+class Main {
+    public static void main(String[] args) {
+ 
+        String s = "Java Stream API Java Java API";
+ 
+        Map<String, Long> map =
+                Arrays.stream(s.split("\\s+"))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+ 
+        Map.Entry<String, Long> max =
+                map.entrySet()
+                   .stream()
+                   .max(Map.Entry.comparingByValue())
+                   .get();
+ 
+        System.out.println(max);
+    }
+}
