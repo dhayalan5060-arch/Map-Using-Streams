@@ -1,0 +1,20 @@
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.function.Function;
+class Main {
+    public static void main(String[] args) {
+        
+        String s= "Java programming";
+        
+        Optional<String> ans = Arrays.stream(s.split(""))
+                                     .filter(c -> !c.equals(""))
+                               .collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new, Collectors.counting()))
+                               .entrySet()
+                               .stream()
+                               .filter(x->x.getValue()>=2)
+                               .map(x->x.getKey())
+                               .findFirst();
+    
+        System.out.println(ans);
+    }
+}
